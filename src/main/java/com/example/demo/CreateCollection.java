@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class CreateCollection {
-    public void init() {
+    public static void main(String[] args) {
         Region region = Region.US_EAST_1;
         AwsSessionCredentials credentials = AwsSessionCredentials.create("ASIA5DF2NVTGSPE2KS76", "fLHirCxxqa/Vhpz2yPuQqKtthb2AqXtj72uLMeZc", "FwoGZXIvYXdzEJj//////////wEaDNJWVkE+jceUpePMmCLaAS0UHi0tjHLio+JITmqQO8ITFjQLitZq+2fJ+h3Rg3catEivVC7bSWKPVIOCT3wSM6jnClMjKOKdwozREFNufX9F2RPdCAaWun5ieN3ThEdhcT0od76cKcKnaDB7HaTSckQn3JcF0DWH16UE3h+P9z2V7LyenOvhPCSy/UXl/5rGtvbWC8TotwtKLhGRBEJ7luKIFiBhOIQNm2GsGF1tz23x57yGkDJ95Ne8+nsHmY5YnfCfIpWZQdBjhGNJtprEYpHT4ApNQTrh1fGx6Z4ZRt59rYRCyyYSd2vIKNi9qqMGMi2oXcey/QJxa4Tqv7OmXb7kx5gcQ5BTC0tHsnK1HqIRE57x3z47vmSBceL5bW0=");
 
@@ -19,25 +19,25 @@ public class CreateCollection {
                 .region(region)
                 .credentialsProvider(StaticCredentialsProvider.create(credentials))
                 .build();
-//
-//        String collectionId = "areprekog";
+
+//        String collectionId = "collectionarep";
 //
 //        CreateCollectionRequest request = CreateCollectionRequest.builder()
 //                .collectionId(collectionId)
 //                .build();
-//
+
 //        CreateCollectionResponse response = rekognitionClient.createCollection(request);
-//
-//
-//
+
+
+
 //        System.out.println("Colección creada: " + response.collectionArn());
 
-        HashMap<String, String> imageAtt = identifyImage("imagen_2023-05-21_191334830.png", rekognitionClient);
-        HashMap<String, String> videoAtt = identifyVideo("y2mate.com - hombre llorando meme.mp3", rekognitionClient);
+//        HashMap<String, String> imageAtt = identifyImage("imagen_2023-05-22_002231209.png", rekognitionClient);
+        HashMap<String, String> videoAtt = identifyVideo("videoplayback.mp4", rekognitionClient);
 
     }
 
-    public HashMap<String, String> identifyImage(String image, RekognitionClient rekognitionClient){
+    public static HashMap<String, String> identifyImage(String image, RekognitionClient rekognitionClient){
         S3Object s3Object = S3Object.builder()
                 .bucket("arepbuck")
                 .name(image)
@@ -54,15 +54,19 @@ public class CreateCollection {
         System.out.println("Etiquetas detectadas en la imagen:");
         HashMap<String, String> att = new HashMap<>();
         for (Label label : labels) {
-            att.put(label.name(), label.confidence().toString());
-            System.out.println(label.name() + ": " + label.confidence().toString());
+            if (label.name().equals("Happy") || label.name().equals("Sad") || label.name().equals("Tears") ||
+                    label.name().equals("Surprised") || label.name().equals("Smile") || label.name().equals("Frown") || label.name().equals("Angry")){
+                att.put(label.name(), label.confidence().toString());
+                System.out.println(label.name() + ": " + label.confidence().toString());
+            }
+
         }
         return att;
 
 
     }
 
-    public HashMap<String, String> identifyVideo(String video, RekognitionClient rekognitionClient){
+    public static HashMap<String, String> identifyVideo(String video, RekognitionClient rekognitionClient){
         S3Object s3Object = S3Object.builder()
                 .bucket("arepbuck")
                 .name(video)
@@ -87,7 +91,8 @@ public class CreateCollection {
         List<LabelDetection> labelDetections = labelDetectionResponse.labels();
         HashMap<String, String> att = new HashMap<>();
         for (LabelDetection labelDetection : labelDetections) {
-            if(labelDetection.label().confidence() > 95){
+            if (labelDetection.label().name().equals("Happy") || labelDetection.label().name().equals("Sad") || labelDetection.label().name().equals("Crying") ||
+                    labelDetection.label().name().equals("Surprised") || labelDetection.label().name().equals("Sweating")) {
                 att.put(labelDetection.label().name(), labelDetection.label().confidence().toString());
             }
 

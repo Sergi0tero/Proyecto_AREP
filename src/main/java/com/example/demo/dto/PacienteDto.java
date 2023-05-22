@@ -3,47 +3,28 @@ package com.example.demo.dto;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "paciente")
+@Table(name = "pacientes")
 public class PacienteDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    private String name;
+    private String nombre;
     private int edad;
-    private int lugarDeNacimiento;
+    private String nacimiento;
     private String correo;
     private int celular;
-    private String happy;
-    private String surprised;
-    private String sad;
+    private int happy;
+    private int surprised;
+    private int sad;
 
-    public PacienteDto(String name, int edad, int lugarDeNacimiento, String correo, int celular) {
-        this.name = name;
-        this.edad = edad;
-        this.lugarDeNacimiento = lugarDeNacimiento;
-        this.correo = correo;
-        this.celular = celular;
+
+
+    public String getNombre() {
+        return nombre;
     }
 
-    public PacienteDto() {
-
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public int getEdad() {
@@ -54,12 +35,12 @@ public class PacienteDto {
         this.edad = edad;
     }
 
-    public int getLugarDeNacimiento() {
-        return lugarDeNacimiento;
+    public String getNacimiento() {
+        return nacimiento;
     }
 
-    public void setLugarDeNacimiento(int lugarDeNacimiento) {
-        this.lugarDeNacimiento = lugarDeNacimiento;
+    public void setNacimiento(String nacimiento) {
+        this.nacimiento = nacimiento;
     }
 
     public String getCorreo() {
@@ -78,27 +59,35 @@ public class PacienteDto {
         this.celular = celular;
     }
 
-    public String getHappy() {
+    public int getHappy() {
         return happy;
     }
 
-    public void setHappy(String happy) {
+    public void setHappy(int happy) {
         this.happy = happy;
     }
 
-    public String getSurprised() {
+    public int getSurprised() {
         return surprised;
     }
 
-    public void setSurprised(String surprised) {
+    public void setSurprised(int surprised) {
         this.surprised = surprised;
     }
 
-    public String getSad() {
+    public int getSad() {
         return sad;
     }
 
-    public void setSad(String sad) {
+    public void setSad(int sad) {
         this.sad = sad;
     }
+
+
+
+
+    public PacienteDto() {
+
+    }
+
 }

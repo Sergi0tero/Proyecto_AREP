@@ -46,15 +46,22 @@ public class PacienteService {
     public void updateBehaviors(String id, JSONObject behaviors){
         PacienteDto paciente = getPacienteById(id);
         for (String name: behaviors.keySet()){
-
-            if (Objects.equals(name, "Happy")){
-                paciente.setHappy(behaviors.getString(name));
-            } else if (Objects.equals(name, "Sad")){
-                paciente.setSad(behaviors.getString(name));
-            } else if (Objects.equals(name, "Surprised")){
-                paciente.setSurprised(behaviors.getString(name));
+            System.out.println("1");
+            if (Objects.equals(name, "happy")){
+                System.out.println("2");
+                System.out.println(behaviors.getInt(name));
+                paciente.setHappy(behaviors.getInt(name));
+            } else if (Objects.equals(name, "sad")){
+                System.out.println("3");
+                System.out.println(behaviors.getInt(name));
+                paciente.setSad(behaviors.getInt(name));
+            } else if (Objects.equals(name, "surprised")){
+                System.out.println("4");
+                System.out.println(behaviors.getInt(name));
+                paciente.setSurprised(behaviors.getInt(name));
             }
 
         }
+        pacienteRepository.save(paciente);
     }
 }
