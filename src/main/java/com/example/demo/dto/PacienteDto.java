@@ -1,9 +1,9 @@
-package dto;
+package com.example.demo.dto;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "paciente")
 public class PacienteDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +24,10 @@ public class PacienteDto {
         this.lugarDeNacimiento = lugarDeNacimiento;
         this.correo = correo;
         this.celular = celular;
+    }
+
+    public PacienteDto() {
+
     }
 
     public int getId() {
