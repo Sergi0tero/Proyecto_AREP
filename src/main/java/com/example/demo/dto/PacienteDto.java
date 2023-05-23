@@ -12,7 +12,7 @@ public class PacienteDto {
     private int edad;
     private String nacimiento;
     private String correo;
-    private int celular;
+    private long celular;
     private int happy;
     private int surprised;
     private int sad;
@@ -51,11 +51,11 @@ public class PacienteDto {
         this.correo = correo;
     }
 
-    public int getCelular() {
+    public long getCelular() {
         return celular;
     }
 
-    public void setCelular(int celular) {
+    public void setCelular(long celular) {
         this.celular = celular;
     }
 

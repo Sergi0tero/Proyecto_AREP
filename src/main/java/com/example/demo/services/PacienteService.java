@@ -47,15 +47,15 @@ public class PacienteService {
         PacienteDto paciente = getPacienteById(id);
         for (String name: behaviors.keySet()){
             System.out.println("1");
-            if (Objects.equals(name, "happy")){
+            if (Objects.equals(name, "Happy")){
                 System.out.println("2");
                 System.out.println(behaviors.getInt(name));
                 paciente.setHappy(behaviors.getInt(name));
-            } else if (Objects.equals(name, "sad")){
+            } else if (Objects.equals(name, "Sad")){
                 System.out.println("3");
                 System.out.println(behaviors.getInt(name));
                 paciente.setSad(behaviors.getInt(name));
-            } else if (Objects.equals(name, "surprised")){
+            } else if (Objects.equals(name, "Surprised")){
                 System.out.println("4");
                 System.out.println(behaviors.getInt(name));
                 paciente.setSurprised(behaviors.getInt(name));
